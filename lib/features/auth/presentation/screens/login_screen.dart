@@ -1,4 +1,6 @@
+import 'package:appteslo/features/auth/presentation/providers/login_form_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:appteslo/features/shared/shared.dart';
 
@@ -48,11 +50,15 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-class _LoginForm extends StatelessWidget {
+
+
+class _LoginForm extends ConsumerWidget {
   const _LoginForm();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context , WidgetRef ref) {
+  final loginForm = ref.watch(LoginFormProvider);
+
 
     final textStyles = Theme.of(context).textTheme;
 
@@ -64,15 +70,19 @@ class _LoginForm extends StatelessWidget {
           Text('Login', style: textStyles.titleLarge ),
           const SizedBox( height: 90 ),
 
-          const CustomTextFormField(
+           CustomTextFormField(
             label: 'Correo',
             keyboardType: TextInputType.emailAddress,
+            onChanged: ref.read(LoginFormProvider.notifier).onEmailChange,
+             errorMessage: loginForm.email.errorMessage,
           ),
           const SizedBox( height: 30 ),
 
-          const CustomTextFormField(
+           CustomTextFormField(
             label: 'Contraseña',
             obscureText: true,
+            onChanged: ref.read(LoginFormProvider.notifier).onPasswordChange,
+            errorMessage: loginForm.password.errorMessage,
           ),
     
           const SizedBox( height: 30 ),
@@ -84,6 +94,7 @@ class _LoginForm extends StatelessWidget {
               text: 'Ingresar',
               buttonColor: Colors.black,
               onPressed: (){
+                ref.read(LoginFormProvider.notifier).onFormSubmit();
 
               },
             )

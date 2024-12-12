@@ -3,9 +3,8 @@ import 'package:appteslo/features/auth/auth.dart';
 import 'package:appteslo/features/products/products.dart';
 
 final appRouter = GoRouter(
-  initialLocation: '/',
+  initialLocation: '/login',
   routes: [
-
     ///* Auth Routes
     GoRoute(
       path: '/login',
