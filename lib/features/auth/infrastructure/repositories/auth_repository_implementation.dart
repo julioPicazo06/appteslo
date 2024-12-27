@@ -6,9 +6,7 @@ import '../infraestructure.dart';
 class AuthRepositoryImp extends AuthRepository {
   final AuthDataSourse dataSourse;
 
-  AuthRepositoryImp(
-      AuthDataSourse ? dataSourse
-       ) : dataSourse = dataSourse ?? AuthDataSourceImpl();
+  AuthRepositoryImp({AuthDataSourse? dataSourse}) : dataSourse = dataSourse ?? AuthDataSourceImpl();
 
   @override
   Future<User> checkAuthStatus(String token) {
