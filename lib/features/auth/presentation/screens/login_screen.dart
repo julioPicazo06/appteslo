@@ -6,6 +6,7 @@ import 'package:appteslo/features/shared/shared.dart';
 
 
 class LoginScreen extends StatelessWidget {
+
   const LoginScreen({super.key});
 
   @override
